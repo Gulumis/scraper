@@ -1,6 +1,7 @@
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup as soup
 import pandas as pd 
+import pdb
 
 def main():
 
@@ -11,10 +12,12 @@ def main():
     page_soup = soup(webpage, "html.parser")
     title = page_soup.find("title")
 
+    #pdb.set_trace() 
+
     list = []
     df = pd.DataFrame()
 
-    containers = page_soup.findAll("p","article-lead", text=True)
+    containers = page_soup.findAll("h2","article-title", text=True)
     for container in containers:
         list.append(container.find(text=True).strip())
 
@@ -24,3 +27,10 @@ def main():
 if __name__ == "__main__":
     df = main()
     print(df)
+
+
+
+
+
+    
+
